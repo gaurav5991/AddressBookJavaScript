@@ -15,14 +15,17 @@ class ContactDetails{
     }
 
     // getter and seter methods
-
     //firstname
     get firstName(){
         return this._firstName;
     }
 
     set firstName(firstName){
-        this._firstName = firstName;
+        var regexp = RegExp('^[A-Z]{1}[A-Za-z]{2,}$');
+        if(regexp.test(firstName)){
+            this._firstName = firstName;
+        }
+        else throw 'First Name should start with letter and have a minimum of three characters';
     }
     //lastname
     get lastname(){
@@ -30,7 +33,11 @@ class ContactDetails{
     }
     
     set lastname(lastname){
-        this._lastname = lastname;
+        var regexp = RegExp('^[A-Z]{1}[A-Za-z]{2,}$');
+        if(regexp.test(lastname)){
+            this._lastname = lastname;
+        }
+        else throw 'Last Name should start with letter and have a minimum of three characters';
     }
     //address
     get address(){
@@ -38,7 +45,11 @@ class ContactDetails{
     }
     
     set address(address){
-        this._address = address;
+        var regexp = RegExp('^[a-zA-Z0-9 ]{4,}$');
+        if(regexp.test(address)){
+            this._address = address;
+        }
+        else throw 'Address should have minimum of four characters';
     }
 
     //city
@@ -47,7 +58,11 @@ class ContactDetails{
     }
     
     set city(city){
-        this._city = city;
+        var regexp = RegExp('^[a-zA-Z ]{4,}$');
+        if(regexp.test(city)){
+            this._city = city;
+        }
+        else throw 'City should have minimum of four characters';
     }
 
     // state
@@ -56,7 +71,11 @@ class ContactDetails{
     }
     
     set state(state){
-        this._state = state;
+        var regexp = RegExp('^[a-zA-Z ]{4,}$');
+        if(regexp.test(state)){
+            this._state = state;
+        }
+        else throw 'State should have minimum of four characters';
     }
 
     // zip
@@ -65,7 +84,11 @@ class ContactDetails{
     }
     
     set zip(zip){
-        this._zip = zip;
+        var regexp = RegExp('^[0-9]{3}\\s{0,1}[0-9]{3}$');
+        if(regexp.test(zip)){
+            this._zip = zip;
+        }
+        else throw 'Zip is not of standard format'
     }
     // phone
     get phone(){
@@ -73,7 +96,11 @@ class ContactDetails{
     }
     
     set phone(phone){
-        this._phone = phone;
+        var regexp = RegExp('^[0-9]{2} [0-9]{10}$');
+        if(regexp.test(phone)){
+            this._phone = phone;
+        }
+        else throw 'Phone Number is Incorrect'
     }
     // Email
     get email(){
@@ -81,7 +108,11 @@ class ContactDetails{
     }
     
     set email(email){
-        this._email = email;
+        var regexp = RegExp('^[a-zA-Z0-9]+[_+-.]?[a-zA-Z0-9]*[a-zA-Z0-9]@[a-zA-Z0-9]+([.][a-zA-Z]{2,4})([.][a-zA-Z]{2,4})?$');
+        if(regexp.test(email)){
+            this._email = email;
+        }
+        else throw 'Email is Incorrect'
     }
 
     //toString Method
