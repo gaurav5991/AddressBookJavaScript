@@ -240,6 +240,13 @@ function findAndDeleteContact(firstName, lastname) {
   AddressBookArr.pop(contact);
 }
 
+// Function to Count Number of Contacts in AddressBook
+function countContact(addressBook) {
+    let count = 0;
+    count = AddressBookArr.reduce(count => count+1,0)
+    console.log("Total Number of Contacts in AddressBook: "+count);
+}
+
 // Find and Edit Contact : Calling Functions
 let contactToEdit = findContact("David", "Warner");
 editContact(contactToEdit, "Shaun", "firstName");
@@ -253,3 +260,7 @@ AddressBookArr.forEach((contactObj) => {
 });
 console.log("/--------------------");
 
+// Count Number of Contacts : Calling Function
+console.log("COUNT CONTACT")
+countContact(AddressBookArr);
+console.log("/--------------------");
