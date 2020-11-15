@@ -5,7 +5,7 @@ class ContactDetails{
     // Constructor: Intialize an Object Using Param
     constructor(...params){
         this.firstName = params[0];
-        this.lastname  = params[1];
+        this.lastName  = params[1];
         this.address = params[2];
         this.city = params[3];
         this.state = params[4];
@@ -27,15 +27,15 @@ class ContactDetails{
         }
         else throw 'First Name should start with letter and have a minimum of three characters';
     }
-    //lastname
-    get lastname(){
-        return this._lastname;
+    //lastName
+    get lastName(){
+        return this._lastName;
     }
     
-    set lastname(lastname){
+    set lastName(lastName){
         var regexp = RegExp('^[A-Z]{1}[A-Za-z]{2,}$');
-        if(regexp.test(lastname)){
-            this._lastname = lastname;
+        if(regexp.test(lastName)){
+            this._lastName = lastName;
         }
         else throw 'Last Name should start with letter and have a minimum of three characters';
     }
@@ -117,7 +117,7 @@ class ContactDetails{
 
     //toString Method
     toString(){
-        return "First Name: "+this.firstName + " Last Name: "+this.lastname + " Address: "+this.address+
+        return "First Name: "+this.firstName + " Last Name: "+this.lastName + " Address: "+this.address+
                 " City: "+this.city+" State: "+this.state+" Zip: "+this.zip+" Phone number: "+this.phone+" Email: "+this.email;
     }
 }
@@ -133,4 +133,63 @@ try{
     console.error(e);
 }
 
+// Find Existing Contact Using name and edit it
+
+function findContact(firstName,lastName){
+    let contactObj;
+   AddressBookArr.forEach(contact =>{
+       if((contact.firstName == firstName) && (contact.lastName == lastName)){
+           contactObj = contact;
+       }
+   });
+   return contactObj;
+}
+
+function editContact(contactObj,newValue,property) {
+    try{
+        switch (property) {
+            case firstName:
+                contactObj.firstName == newValue;
+                break;
+            case lastName:
+                contact.lastName == newValue;
+                break;
+            case address:
+                contact.address == newValue;
+                break;
+            case city:
+                contact.city == newValue;
+                break;
+            case state:
+                contact.state == newValue;
+                break;
+            case zip:
+                contact.zip == newValue;
+                break;
+            case phone:
+                contact.phone == newValue;
+                break;
+            case email:
+                contact.email == newValue;
+                break;
+            default:
+                break;
+        }
+    }catch(e){
+        console.error("Unable to edit Contact")
+    }
+}
+
+// let Contact = findContact("David","Warner");
+
+editContact(findContact("David","Warner"),"Shaun",firstName);
+
+
+// Find Existing Contact Using name and delete it
+
+// function deleteContact(firstName,lastName) {
+//     AddressBookArr.forEach(contactObj => {
+//         if(contactObj.firstName == )
+//     })
+// }
 
