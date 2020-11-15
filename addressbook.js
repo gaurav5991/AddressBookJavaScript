@@ -135,55 +135,16 @@ class ContactDetails {
 
 // Create New AddressBook  and  Add contact to it
 let AddressBookArr = new Array();
+let contact1 = new ContactDetails("Adam", "Shaw", "xyz apartments", "Mumbai", "Maharashtra", "312542", "91 9534567890", "adam@gmail.com");
+let contact2 = new ContactDetails("John", "Smith", "abc apartments", "NewYork", "England", "123456", "91 9988776655", "john@yahoo.com");
+let contact3 = new ContactDetails("Mark", "Boucher", "pqr apartments", "Delhi", "Delhi", "789456", "91 9874561234", "mark@rediff.com");
+let contact4 = new ContactDetails("David", "Warner", "qwe apartments", "London", "Wales", "456123", "91 9975462184", "david@capg.com");
+
 try {
-    AddressBookArr.push(
-        new ContactDetails(
-            "Adam",
-            "Shaw",
-            "xyz apartments",
-            "Mumbai",
-            "Maharashtra",
-            "312542",
-            "91 9534567890",
-            "adam@gmail.com"
-        )
-    );
-    AddressBookArr.push(
-        new ContactDetails(
-            "John",
-            "Smith",
-            "abc apartments",
-            "NewYork",
-            "England",
-            "123456",
-            "91 9988776655",
-            "john@yahoo.com"
-        )
-    );
-    AddressBookArr.push(
-        new ContactDetails(
-            "Mark",
-            "Boucher",
-            "pqr apartments",
-            "Delhi",
-            "Delhi",
-            "789456",
-            "91 9874561234",
-            "mark@rediff.com"
-        )
-    );
-    AddressBookArr.push(
-        new ContactDetails(
-            "David",
-            "Warner",
-            "qwe apartments",
-            "London",
-            "Wales",
-            "456123",
-            "91 9975462184",
-            "david@capg.com"
-        )
-    );
+    AddressBookArr.push(contact1);
+    AddressBookArr.push(contact2);
+    AddressBookArr.push(contact3);
+    AddressBookArr.push(contact4);
 } catch (e) {
     console.error("Unable to Add Contact");
 }
@@ -255,6 +216,20 @@ function addContact(contactToAdd) {
         AddressBookArr.push(contact);
 }
 
+// Function to Search contact in AddressBook By city
+function searchContactByCity(property,value, AddressBook) {
+    let filteredAddressBook;
+    switch (property) {
+        case "city":
+            filteredAddressBook = AddressBookArr.filter(contact => contact.city == value);
+            break;
+        case "state":
+            filteredAddressBook = AddressBookArr.filter(contact => contact.state == value);
+            break;
+    }
+    return filteredAddressBook;
+}
+
 // Find and Edit Contact : Calling Functions
 let contactToEdit = findContact("David", "Warner");
 editContact(contactToEdit, "Shaun", "firstName");
@@ -285,3 +260,9 @@ let contact = new ContactDetails(
     "adam@gmail.com"
 );
 addContact(contact);
+
+// Search Contact in AddressBook by city or state : Calling Function
+console.log("SEARCH CONTACT");
+let contacts = searchContactByCity("city","Delhi",AddressBookArr);
+console.log(contact.toString());
+console.log("/--------------------");
