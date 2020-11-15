@@ -122,4 +122,15 @@ class ContactDetails{
     }
 }
 
+// Create New AddressBook  and contact to it
+let AddressBookArr = new Array();
+try{
+    AddressBookArr.push(new ContactDetails("Adam", "Shaw", "xyz apartments", "Mumbai", "Maharashtra", "312542", "91 9534567890", "adam@gmail.com"));
+    AddressBookArr.push(new ContactDetails("John",  "Smith", "abc apartments", "NewYork", "England", "123456", "91 9988776655", "john@yahoo.com"));
+    AddressBookArr.push(new ContactDetails("Mark", "Boucher", "pqr apartments", "Delhi", "Delhi", "789456", "91 9874561234", "mark@rediff.com"));
+    AddressBookArr.push(new ContactDetails("David", "Warner", "qwe apartments", "London", "Wales", "456123", "91 9975462184", "david@capg.com"));
+}catch(e){
+    console.error(e);
+}
+
 
