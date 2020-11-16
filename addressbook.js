@@ -232,28 +232,48 @@ function searchContactByCity(property, value, AddressBook) {
 
 // Function to view Contact by City or State
 function viewContact(property, value, AddressBook) {
-    let AddressBookMap = new Map();
+    let contactMap = new Map();
     switch (property) {
-        case "city":
-            AddressBookArr.forEach(contact => {
-                if (contact.city == value) {
-                    AddressBookMap.set(contact.city, contact);
+        case "City":
+            addressBook.forEach(contact => {
+                if (!contactMap.get(contact.city)) {
+                    contactMap.set(contact.city, [contact]);
                 } else {
-                    throw "Not Found";
+                    contactMap.get(contact.city).push(contact);
                 }
             });
             break;
-        case "state":
-            AddressBookArr.forEach(contact => {
-                if (contact.state == value) {
-                    AddressBookMap.set(contact.state, contact);
+        case "State":
+            addressBook.forEach(contact => {
+                if (!contactMap.get(contact.state)) {
+                    contactMap.set(contact.state, [contact]);
                 } else {
-                    throw "Not Found";
+                    contactMap.get(contact.state).push(contact);
                 }
             });
             break;
     }
-    return AddressBookMap;
+    return contactMap;
+}
+
+// Count by city/state
+function countByAttribute(property, addressBookArr) {
+    let countMap = new Map();
+    switch (property) {
+        case "city":
+            let contactMapCity = viewContact("city", addressBookArr);
+            contactMapCity.forEach((value, key) => {
+                countMap.set(key, value.length);
+            });
+            break;
+        case "state":
+            let contactMapState = viewContact("state", addressBookArr);
+            contactMapState.forEach((value, key) => {
+                countMap.set(key, value.length);
+            });
+            break;
+    }
+    return countMap;
 }
 
 // Find and Edit Contact : Calling Functions
@@ -295,9 +315,14 @@ console.log("/--------------------");
 
 // View Contact in AddressBook by city or state : Calling Function
 try {
-    let xyz = viewContact("state", "Australia", "AddressBookArr");
-    console.log(Array.from(xyz.values()).toString());
+    let xyz = viewContact("state", "Delhi", "AddressBookArr");
+    addressBookArr.forEach(contact => console.log(contact.toString()));
 } catch (error) {
     console.log("Cannot view Contact. Some input fields are incorrect");
 }
 
+// Count Contact in AddressBook by city or state : Calling Function
+let countMap = countByProperty("city", addressBookArr);
+console.log("COUNT CONTACT");
+console.log(countMap);
+console.log("/-----------------");
