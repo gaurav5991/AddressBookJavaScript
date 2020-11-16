@@ -217,7 +217,7 @@ function addContact(contactToAdd) {
 }
 
 // Function to Search contact in AddressBook By city
-function searchContactByCity(property,value, AddressBook) {
+function searchContactByCity(property, value, AddressBook) {
     let filteredAddressBook;
     switch (property) {
         case "city":
@@ -228,6 +228,32 @@ function searchContactByCity(property,value, AddressBook) {
             break;
     }
     return filteredAddressBook;
+}
+
+// Function to view Contact by City or State
+function viewContact(property, value, AddressBook) {
+    let AddressBookMap = new Map();
+    switch (property) {
+        case "city":
+            AddressBookArr.forEach(contact => {
+                if (contact.city == value) {
+                    AddressBookMap.set(contact.city, contact);
+                } else {
+                    throw "Not Found";
+                }
+            });
+            break;
+        case "state":
+            AddressBookArr.forEach(contact => {
+                if (contact.state == value) {
+                    AddressBookMap.set(contact.state, contact);
+                } else {
+                    throw "Not Found";
+                }
+            });
+            break;
+    }
+    return AddressBookMap;
 }
 
 // Find and Edit Contact : Calling Functions
@@ -263,6 +289,15 @@ addContact(contact);
 
 // Search Contact in AddressBook by city or state : Calling Function
 console.log("SEARCH CONTACT");
-let contacts = searchContactByCity("city","Delhi",AddressBookArr);
-console.log(contact.toString());
+let contacts = searchContactByCity("city", "Delhi", AddressBookArr);
+console.log(contacts.toString());
 console.log("/--------------------");
+
+// View Contact in AddressBook by city or state : Calling Function
+try {
+    let xyz = viewContact("state", "Australia", "AddressBookArr");
+    console.log(Array.from(xyz.values()).toString());
+} catch (error) {
+    console.log("Cannot view Contact. Some input fields are incorrect");
+}
+
