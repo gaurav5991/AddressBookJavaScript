@@ -141,10 +141,7 @@ let contact3 = new ContactDetails("Mark", "Boucher", "pqr apartments", "Delhi", 
 let contact4 = new ContactDetails("David", "Warner", "qwe apartments", "London", "Wales", "456123", "91 9975462184", "david@capg.com");
 
 try {
-    AddressBookArr.push(contact1);
-    AddressBookArr.push(contact2);
-    AddressBookArr.push(contact3);
-    AddressBookArr.push(contact4);
+    AddressBookArr.push(contact1,contact2,contact2,contact4);
 } catch (e) {
     console.error("Unable to Add Contact");
 }
@@ -204,7 +201,7 @@ function findAndDeleteContact(firstName, lastname) {
 // Function to Count Number of Contacts in AddressBook
 function countContact(addressBook) {
     let count = 0;
-    count = AddressBookArr.reduce(count => count + 1, 0)
+    count = addressBook.reduce(count => count + 1, 0)
     console.log("Total Number of Contacts in AddressBook: " + count);
 }
 
@@ -221,17 +218,17 @@ function searchContactByCity(property, value, AddressBook) {
     let filteredAddressBook;
     switch (property) {
         case "city":
-            filteredAddressBook = AddressBookArr.filter(contact => contact.city == value);
+            filteredAddressBook = AddressBook.filter(contact => contact.city == value);
             break;
         case "state":
-            filteredAddressBook = AddressBookArr.filter(contact => contact.state == value);
+            filteredAddressBook = AddressBook.filter(contact => contact.state == value);
             break;
     }
     return filteredAddressBook;
 }
 
 // Function to view Contact by City or State
-function viewContact(property, value, AddressBook) {
+function viewContact(property, value, addressBook) {
     let contactMap = new Map();
     switch (property) {
         case "City":
@@ -257,7 +254,7 @@ function viewContact(property, value, AddressBook) {
 }
 
 // Count by city/state
-function countByAttribute(property, addressBookArr) {
+function countByProperty(property, addressBookArr) {
     let countMap = new Map();
     switch (property) {
         case "city":
@@ -274,6 +271,11 @@ function countByAttribute(property, addressBookArr) {
             break;
     }
     return countMap;
+}
+
+// Sort by firstName, city, state or zip
+function sortByName(addressBookArr) {
+    return addressBookArr.sort((con1, con2) => (con1.firstName > con2.firstName) ? 1 : -1);
 }
 
 // Find and Edit Contact : Calling Functions
@@ -315,14 +317,20 @@ console.log("/--------------------");
 
 // View Contact in AddressBook by city or state : Calling Function
 try {
-    let xyz = viewContact("state", "Delhi", "AddressBookArr");
-    addressBookArr.forEach(contact => console.log(contact.toString()));
+    let xyz = viewContact("state", "Delhi", AddressBookArr);
+    AddressBookArr.forEach(contact => console.log(contact.toString()));
 } catch (error) {
     console.log("Cannot view Contact. Some input fields are incorrect");
 }
 
 // Count Contact in AddressBook by city or state : Calling Function
-let countMap = countByProperty("city", addressBookArr);
+let countMap = countByProperty("city", AddressBookArr);
 console.log("COUNT CONTACT");
 console.log(countMap);
 console.log("/-----------------");
+
+// Sort by first name
+let addressBookNameSort = sortByName(AddressBookArr);
+console.log("SORT BY FIRST NAME");
+addressBookNameSort.forEach(contact => console.log(contact.toString()));
+console.log("/------------------");
